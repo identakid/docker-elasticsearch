@@ -17,7 +17,7 @@
 #                           Run as root user (for now).
 # ################################################################
 
-FROM dockerfile/java:oracle-java8
+FROM cgswong/java:oraclejdk8
 MAINTAINER Stuart Wong <cgs.wong@gmail.com>
 
 # Setup environment
@@ -39,10 +39,10 @@ RUN curl -s https://download.elasticsearch.org/elasticsearch/elasticsearch/elast
 COPY conf/elasticsearch.yml ${ES_HOME}/config/
 COPY elasticsearch.sh ${ES_EXEC}
 
-##RUN groupadd -r ${ES_GROUP} \
-##  && useradd -M -r -d ${ES_HOME} -g ${ES_GROUP} -c "Elasticsearch Service User" -s /bin/false ${ES_USER} \
-##  && chown -R ${ES_USER}:${ES_GROUP} ${ES_HOME} ${ES_VOL} $ES_EXEC \
-RUN chmod +x ${ES_EXEC}
+RUN groupadd -r ${ES_GROUP} \
+  && useradd -M -r -d ${ES_HOME} -g ${ES_GROUP} -c "Elasticsearch Service User" -s /bin/false ${ES_USER} \
+  && chown -R ${ES_USER}:${ES_GROUP} ${ES_HOME} ${ES_VOL} $ES_EXEC \
+  && chmod +x ${ES_EXEC}
 VOLUME ["${ES_VOL}"]
 
 # Define working directory.
