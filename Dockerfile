@@ -31,7 +31,7 @@ ENV ES_EXEC /usr/local/bin/elasticsearch.sh
 # Install Elasticsearch
 WORKDIR /opt
 RUN apt-get -yq update && DEBIAN_FRONTEND=noninteractive apt-get -yq install curl \
-  && apt-get -y clean && apt-get -y auto clean && apt-get -y autoremove \
+  && apt-get -y clean && apt-get -y autoclean && apt-get -y autoremove \
   && rm -rf /var/lib/apt/lists/* \
   && curl -s https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-${ES_VERSION}.tar.gz | tar zx - \
   && ln -s elasticsearch-${ES_VERSION} elasticsearch \
