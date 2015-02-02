@@ -17,31 +17,34 @@
 #                           Run as root user (for now).
 # ################################################################
 
-FROM cgswong/java:oraclejdk8
+FROM cgswong/java:oracleJDK8
 MAINTAINER Stuart Wong <cgs.wong@gmail.com>
 
 # Setup environment
 ENV ES_VERSION 1.4.2
-ENV ES_BASE /opt
-ENV ES_HOME ${ES_BASE}/elasticsearch
-ENV ES_VOL ${ES_BASE}/esvol
+ENV ES_HOME /opt/elasticsearch
+ENV ES_VOL /esvol
 ENV ES_USER elasticsearch
 ENV ES_GROUP elasticsearch
 ENV ES_EXEC /usr/local/bin/elasticsearch.sh
 
 # Install Elasticsearch
-WORKDIR ${ES_BASE}
-RUN curl -s https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-${ES_VERSION}.tar.gz | tar zx -C ${ES_BASE} \
+WORKDIR /opt
+RUN apt-get -yq update && DEBIAN_FRONTEND=noninteractive apt-get -yq install curl \
+  && apt-get -y clean && apt-get -y auto clean && apt-get -y autoremove \
+  && rm -rf /var/lib/apt/lists/* \
+  && curl -s https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-${ES_VERSION}.tar.gz | tar zx - \
   && ln -s elasticsearch-${ES_VERSION} elasticsearch \
-  && mkdir -p ${ES_VOL}/{data,log,plugins,work,conf}
+  && mkdir -p ${ES_VOL}/{data,logs,plugins,work,config}
 
 # Configure environment
+ENV JAVA_HOME /usr/lib/jvm/java-8-oracle/bin/java
 COPY conf/elasticsearch.yml ${ES_HOME}/config/
 COPY elasticsearch.sh ${ES_EXEC}
 
 RUN groupadd -r ${ES_GROUP} \
   && useradd -M -r -d ${ES_HOME} -g ${ES_GROUP} -c "Elasticsearch Service User" -s /bin/false ${ES_USER} \
-  && chown -R ${ES_USER}:${ES_GROUP} ${ES_HOME} ${ES_VOL} $ES_EXEC \
+  && chown -R ${ES_USER}:${ES_GROUP} ${ES_HOME} ${ES_VOL} ${ES_EXEC} \
   && chmod +x ${ES_EXEC}
 VOLUME ["${ES_VOL}"]
 

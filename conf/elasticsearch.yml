@@ -5,13 +5,13 @@
 # the locations (a la RAID 0) on a file level, favouring locations with most free
 # space on creation. For example:
 #path.data: /opt/elasticsearch/$inst/data1,/opt/elasticsearch/$inst/data2
-path.data: /opt/esvol/data
+path.data: /esvol/data
 # Path to log files:
-path.logs: /opt/esvol/log
+path.logs: /esvol/logs
 # Path to where plugins are installed:
-path.plugins: /opt/esvol/plugins
+path.plugins: /esvol/plugins
 # Path to temporary files:
-path.work: /opt/esvol/work
+path.work: /esvol/work
 
 # Cluster name identifies your cluster for auto-discovery. If you're running
 # multiple clusters on the same network, make sure you're using unique names.

@@ -7,7 +7,7 @@ It is usually the back-end for a Logstash instance with Kibana as the frontend. 
 
 ### Base Docker Image
 
-* [cgswong/java:oraclejdk8](https://registry.hub.docker.com/u/cgswong/java/) which is based on [cgswong/min-jessie](https://registry.hub.docker.com/u/cgswong/min-jessie/)
+* [cgswong/java:oracleJDK8](https://registry.hub.docker.com/u/cgswong/java/) which is based on [cgswong/min-jessie](https://registry.hub.docker.com/u/cgswong/min-jessie/)
 
 
 ### Installation
@@ -26,28 +26,28 @@ To start a basic container with ephemeral storage:
 docker run -d -p 9200:9200 -p 9300:9300 --name elasticsearch cgswong/elasticsearch
 ```
 
-#### Attach Persistent/Shared Storage
+To start a container with attached persistent/shared storage:
 
-  1. Create a mountable data directory `<data-dir>` on the host. The base directory `/opt/esvol` is exposed as a volume within the container with data stored in `/opt/esvol/data`.
+  1. Create a mountable data directory `<data-dir>` on the host with a `data` subdirectory. The base directory `/esvol` is exposed as a volume within the container with data stored in `/esvol/data`.
 
-  2. Create an Elasticsearch config file at `<data-dir>`/conf/elasticsearch.yml. A sample file is:
+  2. Create an Elasticsearch config file at `<data-dir>`/config/elasticsearch.yml. A sample file is:
 
     ```yml
     path:
-      logs: /opt/esvol/log
-      data: /opt/esvol/data
+      logs: /esvol/log
+      data: /esvol/data
     ```
 
   3. Start the container by mounting the data directory and specifying the custom configuration file:
 
     ```sh
-    docker run -d -p 9200:9200 -p 9300:9300 -v <data-dir>:/opt/esvol --name elasticsearch cgswong/elasticsearch /opt/elasticsearch/bin/elasticsearch -Des.config=/opt/esvol/conf/elasticsearch.yml
+    docker run -d -p 9200:9200 -p 9300:9300 -v <data-dir>:/esvol --name elasticsearch cgswong/elasticsearch /opt/elasticsearch/bin/elasticsearch -Des.config=/esvol/config/elasticsearch.yml
     ```
 
 After a few seconds, open `http://<host>:9200` to see the result.
 
 #### Changing Defaults
-To change the cluster name via environment setting:
+The default cluster name, **es_cluster01**, can be changed via the Docker `-e` flag environment setting:
 
 ```sh
 docker run -d -p 9200:9200 -p 9300:9300 -e ES_CLUSTER_NAME=es_test01 --name elasticsearch cgswong/elasticsearch
