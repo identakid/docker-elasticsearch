@@ -45,6 +45,7 @@ RUN apt-get -yq update && DEBIAN_FRONTEND=noninteractive apt-get -yq install cur
 # Configure environment
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle/bin/java
 COPY conf/elasticsearch.yml ${ES_HOME}/config/
+COPY conf/elasticsearch.yml ${ES_VOL}/config/
 COPY elasticsearch.sh ${ES_EXEC}
 
 RUN groupadd -r ${ES_GROUP} \
