@@ -10,6 +10,7 @@
 # 2014/11/10 cgwong v0.2.0: Added environment variables.
 # 2015/01/28 cgwong v0.3.0: Updated variables.
 # 2015/01/29 cgwong v0.5.0: Enabled previous variables.
+# 2015/02/02 cgwong v1.0.0: Removed unneeded variables, simplified directories layout.
 # #################################################################
 
 # Fail immediately if anything goes wrong and return the value of the last command to fail/run

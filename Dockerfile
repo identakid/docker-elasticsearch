@@ -15,6 +15,7 @@
 #                           Switched to CMD (from ENTRYPOINT) and fixed variable usage to actual.
 #                           Now using Java 8.
 #                           Run as root user (for now).
+# 2015/02/02 cgwong v1.0.0: Added curl install, corrected syntax issues.
 # ################################################################
 
 FROM cgswong/java:oracleJDK8
@@ -35,7 +36,11 @@ RUN apt-get -yq update && DEBIAN_FRONTEND=noninteractive apt-get -yq install cur
   && rm -rf /var/lib/apt/lists/* \
   && curl -s https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-${ES_VERSION}.tar.gz | tar zxf - \
   && ln -s elasticsearch-${ES_VERSION} elasticsearch \
-  && mkdir -p ${ES_VOL}/{data,logs,plugins,work,config}
+  && mkdir -p ${ES_VOL}/data \
+  && mkdir -p ${ES_VOL}/logs \
+  && mkdir -p ${ES_VOL}/plugins \
+  && mkdir -p ${ES_VOL}/work \
+  && mkdir -p ${ES_VOL}/config
 
 # Configure environment
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle/bin/java
