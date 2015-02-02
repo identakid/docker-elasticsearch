@@ -12,6 +12,9 @@
 # 2015/01/29 cgwong v0.5.0: Enabled previous variables.
 # #################################################################
 
+# Fail immediately if anything goes wrong and return the value of the last command to fail/run
+set -eo pipefail
+
 # Set environment
 ES_HOME=/opt/elasticsearch
 ES_VOL=/esvol
