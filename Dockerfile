@@ -35,12 +35,7 @@ RUN apt-get -yq update && DEBIAN_FRONTEND=noninteractive apt-get -yq install cur
   && apt-get -y clean && apt-get -y autoclean && apt-get -y autoremove \
   && rm -rf /var/lib/apt/lists/* \
   && curl -s https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-${ES_VERSION}.tar.gz | tar zxf - \
-  && ln -s elasticsearch-${ES_VERSION} elasticsearch \
-  && mkdir -p ${ES_VOL}/data \
-  && mkdir -p ${ES_VOL}/logs \
-  && mkdir -p ${ES_VOL}/plugins \
-  && mkdir -p ${ES_VOL}/work \
-  && mkdir -p ${ES_VOL}/config
+  && ln -s elasticsearch-${ES_VERSION} elasticsearch
 
 # Configure environment
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle/bin/java
