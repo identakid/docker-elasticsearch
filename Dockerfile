@@ -44,15 +44,17 @@ RUN apt-get -yq update && DEBIAN_FRONTEND=noninteractive apt-get -yq install cur
 
 # Configure environment
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle/bin/java
-COPY conf/elasticsearch.yml ${ES_HOME}/config/
-COPY conf/elasticsearch.yml ${ES_VOL}/config/
-COPY elasticsearch.sh ${ES_EXEC}
+COPY src/ /
+
+#COPY conf/elasticsearch.yml ${ES_HOME}/config/
+#COPY conf/elasticsearch.yml ${ES_VOL}/config/
+#COPY elasticsearch.sh ${ES_EXEC}
 
 RUN groupadd -r ${ES_GROUP} \
   && useradd -M -r -d ${ES_HOME} -g ${ES_GROUP} -c "Elasticsearch Service User" -s /bin/false ${ES_USER} \
-  && chown -R ${ES_USER}:${ES_GROUP} ${ES_HOME} ${ES_VOL} ${ES_EXEC} \
+  && chown -R ${ES_USER}:${ES_GROUP} ${ES_HOME}/ ${ES_VOL} ${ES_EXEC} \
   && chmod +x ${ES_EXEC}
-VOLUME ["${ES_VOL}"]
+VOLUME ["${ES_VOL}/data", "${ES_VOL}/config", "${ES_VOL}/logs"]
 
 # Define working directory.
 WORKDIR ${ES_VOL}
