@@ -33,7 +33,7 @@ docker run -d -p 9200:9200 -p 9300:9300 -v /es/data:/esvol/data --name elasticse
 Attaching persistent storage ensures that the data is retained across container restarts (with some obvious caveats). At this time though, given the state of maturity in this space, I would recommend this be done via a data container (hosting an AWS S3 bucket or other externalized, distributed persistent storage) in a possible production environment.
 
 #### Changing Defaults
-A few environment variables can be passed via the Docker -e flag to do some further configuration:
+A few environment variables can be passed via the Docker `-e` flag to do some further configuration:
 
 - ES_CLUSTER: Sets the cluster name (defaults to es01)
 - ES_CONF: Sets the location of the ES configuration file.
