@@ -17,7 +17,6 @@
 set -eo pipefail
 
 # Set environment
-ES_HOME=/opt/elasticsearch
 ES_VOL=/esvol
 ES_CONF=${ES_CONF:-"/esvol/config/elasticsearch.yml"}
 ES_CLUSTER_NAME=${ES_CLUSTER_NAME:-"es_cluster01"}
@@ -31,7 +30,7 @@ ES_PORT_9200_TCP_ADDR=${ES_PORT_9200_TCP_ADDR:-"9200"}
 
 # if `docker run` first argument start with `--` the user is passing launcher arguments
 if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then
-  ${ES_HOME}/bin/elasticsearch \
+  /opt/elasticsearch/bin/elasticsearch \
     --config=${ES_CONF} \
     --cluster.name=${ES_CLUSTER_NAME} \
     "$@"
