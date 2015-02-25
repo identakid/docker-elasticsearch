@@ -19,7 +19,7 @@ set -eo pipefail
 # Set environment
 ES_VOL=/esvol
 ES_CONF=${ES_CONF:-"/esvol/config/elasticsearch.yml"}
-ES_CLUSTER_NAME=${ES_CLUSTER_NAME:-"es_cluster01"}
+ES_CLUSTER_NAME=${ES_CLUSTER_NAME:-"es01"}
 ES_PORT_9200_TCP_ADDR=${ES_PORT_9200_TCP_ADDR:-"9200"}
 
 # Set varibles as provided
