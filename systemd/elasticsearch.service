@@ -26,7 +26,7 @@ ExecStart=/bin/bash -c '\
   if [ $? -eq 0 ]; then \
       UNICAST_HOSTS=$(for key in $(etcdctl ls --recursive /services/logging/es/${ES_CLUSTER}); do \
         ip=$(echo $key | sed "s/\/services\/logging\/es\/${ES_CLUSTER}\///g") ; \
-        port=$(etcdctl get $key | awk -v RS=',"' -F: '/^cluster_port/ {print $2}' | sed "s/}//g") ; \
+        port=$(etcdctl get $key | awk -v RS=\',"\' -F: \'/^cluster_port/ {print $2}\' | sed "s/}//g") ; \
         echo "$ip:$port" ; \
       done \
       | paste -s -d","); \
