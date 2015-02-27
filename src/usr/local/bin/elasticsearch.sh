@@ -19,12 +19,12 @@ set -eo pipefail
 # Set environment
 ES_VOL=/esvol
 ES_CONF=${ES_CONF:-"/esvol/config/elasticsearch.yml"}
-ES_CLUSTER_NAME=${ES_CLUSTER_NAME:-"es01"}
-ES_PORT_9200_TCP_ADDR=${ES_PORT_9200_TCP_ADDR:-"9200"}
+ES_CLUSTER=${ES_CLUSTER:-"es01"}
+ES_HTTP_PORT=${ES_HTTP_PORT:-"9200"}
 
 # Set varibles as provided
-[ ! -z ${ES_CLUSTER_NAME} ] && sed -e "s/cluster.name: es_cluster01/cluster.name: ${ES_CLUSTER_NAME}/" -i $ES_CONF
-[ ! -z ${ES_PORT_9200_TCP_ADDR} ] && sed -e "s/#node.name: ES_PORT_9200_TCP_ADDR/node.name: ${ES_PORT_9200_TCP_ADDR}/" -i $ES_CONF
+[ ! -z ${ES_CLUSTER} ] && sed -e "s/cluster.name: es_cluster01/cluster.name: ${ES_CLUSTER}/" -i $ES_CONF
+[ ! -z ${ES_HTTP_PORT} ] && sed -e "s/#node.name: ES_HTTP_PORT/node.name: ${ES_HTTP_PORT}/" -i $ES_CONF
 [ ! -z ${ES_RECOVER_TIME} ] && sed -e "s/#gateway.recover_after_time: 5m/gateway.recover_after_time: ${ES_RECOVER_TIME}/" -i $ES_CONF
 [ ! -z ${ES_UNICAST_HOSTS} ] && sed -e "s/#discovery.zen.ping.unicast.hosts: [\"host1\", \"host2:port\"]/discovery.zen.ping.unicast.hosts: ${ES_UNICAST_HOSTS}/" -i $ES_CONF
 
@@ -32,7 +32,7 @@ ES_PORT_9200_TCP_ADDR=${ES_PORT_9200_TCP_ADDR:-"9200"}
 if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then
   /opt/elasticsearch/bin/elasticsearch \
     --config=${ES_CONF} \
-    --cluster.name=${ES_CLUSTER_NAME} \
+    --cluster.name=${ES_CLUSTER} \
     "$@"
 fi
 

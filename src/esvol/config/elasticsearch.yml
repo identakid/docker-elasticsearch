@@ -19,7 +19,7 @@ cluster.name: es01
 
 # Node names are generated dynamically on startup, so you're relieved
 # from configuring them manually. You can tie this node to a specific name:
-#node.name: ES_PORT_9200_TCP_ADDR
+#node.name: ES_HTTP_PORT
 
 # Allow recovery process after N nodes in a cluster are up:
 #gateway.recover_after_nodes: 1
