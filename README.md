@@ -37,4 +37,4 @@ A few environment variables can be passed via the Docker `-e` flag to do some fu
 
 - ES_CLUSTER: Sets the cluster name (defaults to es01)
 - ES_CONF: Sets the location of the ES configuration file.
-- ES_PORT_9200_TCP_ADDR: Sets the ES port (defaults to 9200) which is in the format expected when using the alias `es` for this container in a linked container setup.
+- ES_HTTP_PORT: Sets the ES port (defaults to 9200) which is in the format expected when using the alias `es` for this container in a linked container setup.
