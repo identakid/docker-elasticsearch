@@ -37,4 +37,4 @@ if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then
 fi
 
 # As argument is not Elasticsearch, assume user want to run his own process, for sample a `bash` shell to explore this image
-exec "$@"
+#exec "$@"
