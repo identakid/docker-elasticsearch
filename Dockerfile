@@ -23,7 +23,7 @@
 # 2015/03/24 cgwong v1.3.0: Update to ES 1.5.1, add plug installations
 # ################################################################
 
-FROM identakid/java:8u40-jre
+FROM identakid/java:latest
 MAINTAINER identakid.com <info@identakid.com>
 
 # Setup environment
