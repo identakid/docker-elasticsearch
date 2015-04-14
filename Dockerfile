@@ -23,8 +23,8 @@
 # 2015/03/24 cgwong v1.3.0: Update to ES 1.5.1, add plug installations
 # ################################################################
 
-FROM cgswong/java:orajdk8
-MAINTAINER Stuart Wong <cgs.wong@gmail.com>
+FROM identakid/java:8u40-jre
+MAINTAINER identakid.com <info@identakid.com>
 
 # Setup environment
 ENV ES_VERSION 1.5.0
@@ -39,7 +39,6 @@ ENV ES_GROUP elasticsearch
 WORKDIR ${ES_BASE}
 RUN apt-get -yq update && DEBIAN_FRONTEND=noninteractive apt-get -yq install \
   curl \
-  python-pip \
   && apt-get -y clean && apt-get -y autoclean && apt-get -y autoremove \
   && rm -rf /var/lib/apt/lists/* \
   && curl -s https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-${ES_VERSION}.tar.gz | tar zxf - \
@@ -56,7 +55,6 @@ RUN groupadd -r ${ES_GROUP} \
   && mkdir -p ${ES_VOL}/work \
   && chown -R ${ES_USER}:${ES_GROUP} ${ES_HOME}/ ${ES_VOL} ${ES_EXEC} \
   && chmod +x ${ES_EXEC} \
-  && pip install elasticsearch-curator \
   && ${ES_HOME}/bin/plugin -install elasticsearch/elasticsearch-cloud-aws/2.5.0 --silent --timeout 2m \
   && ${ES_HOME}/bin/plugin -install lukas-vlcek/bigdesk --silent --timeout 2m \
   && ${ES_HOME}/bin/plugin -install mobz/elasticsearch-head --silent --timeout 2m
