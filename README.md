@@ -36,9 +36,6 @@ A few plugins are installed namely:
 
 - Elasticsearch Head: A web front end for an Elasticsearch cluster. Open `http://localhost:9200/_plugin/head/` and it will run it as a plugin within the Elasticsearch cluster.
 
-- Curator: Helps with management of indices. You can learn more at the Elasticsearch Curator documentation site `http://www.elastic.co/guide/en/elasticsearch/client/curator/current/index.html`.
-
-
 ### Configuring the environment (changing defaults)
 The following environment variables can be used to configure the container using the Docker `-e` (or `--env`) flag:
 
