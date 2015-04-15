@@ -9,7 +9,7 @@ path.data: /esvol/data
 # Path to log files:
 path.logs: /esvol/logs
 # Path to where plugins are installed:
-path.plugins: /esvol/plugins
+#path.plugins: /esvol/plugins
 # Path to temporary files:
 path.work: /esvol/work
 
@@ -19,10 +19,10 @@ path.work: /esvol/work
 
 # Node names are generated dynamically on startup, so you're relieved
 # from configuring them manually. You can tie this node to a specific name:
-#node.name: HOSTNAME
+#node.name: ES_NODE_NAME
 
 # Allow recovery process after N nodes in a cluster are up:
-#gateway.recover_after_nodes: 1
+#gateway.recover_after_nodes: ES_RECOVER_AFTER_NODES
 # Set the timeout to initiate the recovery process, once the N nodes
 # from previous setting are up (accepts time value):
 #gateway.recover_after_time: 5m
@@ -37,7 +37,7 @@ discovery.zen.ping.multicast.enabled: false
 # to perform discovery when new nodes (master or data) are started:
 #discovery.zen.ping.unicast.hosts: ["host1", "host2:port"]
 #discovery.zen.ping.unicast.hosts: [{{ range getvs "/services/logging/es/host/*" }}"{{.}}"{{ end }}]
-
+#discovery.zen.minimum_master_nodes: ES_MINIMUM_MASTER_NODES
 # Elasticsearch performs poorly when JVM starts swapping so ensure that
 # it _never_ swaps.
 # Set this property to true to lock the memory:
@@ -49,5 +49,9 @@ bootstrap.mlockall: true
 #cloud.node.auto_attributes: true
 #discovery.type: ec2
 #gateway.type: s3
-#repositories.s3.bucket: "AWS_S3_BUCKET"
-#network.public_host: _ec2_
+#repositories.s3.bucket: AWS_S3_BUCKET
+#network.publish_host: ES_PUBLISH_HOST
+#cloud.aws.region: AWS_REGION
+
+script.disable_dynamic: true
+action.disable_delete_all_indices: true
