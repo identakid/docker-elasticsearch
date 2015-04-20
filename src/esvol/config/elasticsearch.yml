@@ -32,7 +32,7 @@ path.work: /esvol/work
 #gateway.expected_nodes: 2
 
 # Disable multicast discovery:
-discovery.zen.ping.multicast.enabled: false
+#discovery.zen.ping.multicast.enabled: ES_MULTICAST_ENABLED
 # Configure an initial list of master nodes in the cluster
 # to perform discovery when new nodes (master or data) are started:
 #discovery.zen.ping.unicast.hosts: ["host1", "host2:port"]

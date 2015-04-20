@@ -21,6 +21,7 @@ ES_VOL=/esvol
 ES_CONF=${ES_CONF:-"/esvol/config/elasticsearch.yml"}
 ES_CLUSTER_NAME=${ES_CLUSTER_NAME:-"es_cluster01"}
 ES_PORT_9200_TCP_ADDR=${ES_PORT_9200_TCP_ADDR:-"9200"}
+ES_MULTICAST_ENABLED=${ES_MULTICAST_ENABLED:-"false"}
 
 # Download the config file if given a URL
 if [ ! "$(ls -A ${ES_CFG_URL})" ]; then
@@ -43,6 +44,8 @@ if [[ ! -z "$ES_DISCOVERY" && ! -z $AWS_ACCESS_KEY && ! -z $AWS_SECRET_KEY && ! 
     sed -ie "s/#network.publish_host: ES_PUBLISH_HOST/network.publish_host: ${ES_PUBLISH_HOST}/g" $ES_CONF
   fi
 fi
+
+sed -ie "s/#discovery.zen.ping.multicast.enabled: ES_MULTICAST_ENABLED/discovery.zen.ping.multicast.enabled: ${ES_MULTICAST_ENABLED}/g" $ES_CONF
 
 if [[ ! -z "$ES_NODE_NAME" ]]; then
   sed -ie "s/#node.name: ES_NODE_NAME/node.name: ${ES_NODE_NAME}/g" $ES_CONF
