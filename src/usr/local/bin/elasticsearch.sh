@@ -59,6 +59,9 @@ if [[ ! -z "$ES_MINIMUM_MASTER_NODES" ]]; then
   sed -ie "s/#discovery.zen.minimum_master_nodes: ES_MINIMUM_MASTER_NODES/discovery.zen.minimum_master_nodes: ${ES_MINIMUM_MASTER_NODES}/g" $ES_CONF
 fi
 
+if [[ ! -z "$ES_UNICAST_HOSTS" ]]; then
+  sed -ie "s/#discovery.zen.ping.unicast.hosts: ES_UNICAST_HOSTS/discovery.zen.ping.unicast.hosts: ${ES_UNICAST_HOSTS}/g" $ES_CONF
+fi
 
 # if `docker run` first argument start with `--` the user is passing launcher arguments
 if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then

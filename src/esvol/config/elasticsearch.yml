@@ -35,7 +35,7 @@ path.work: /esvol/work
 #discovery.zen.ping.multicast.enabled: ES_MULTICAST_ENABLED
 # Configure an initial list of master nodes in the cluster
 # to perform discovery when new nodes (master or data) are started:
-#discovery.zen.ping.unicast.hosts: ["host1", "host2:port"]
+#discovery.zen.ping.unicast.hosts: ES_UNICAST_HOSTS
 #discovery.zen.ping.unicast.hosts: [{{ range getvs "/services/logging/es/host/*" }}"{{.}}"{{ end }}]
 #discovery.zen.minimum_master_nodes: ES_MINIMUM_MASTER_NODES
 # Elasticsearch performs poorly when JVM starts swapping so ensure that
