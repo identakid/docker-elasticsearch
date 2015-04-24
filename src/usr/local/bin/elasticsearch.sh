@@ -63,6 +63,10 @@ if [[ ! -z "$ES_UNICAST_HOSTS" ]]; then
   sed -ie "s/#discovery.zen.ping.unicast.hosts: ES_UNICAST_HOSTS/discovery.zen.ping.unicast.hosts: ${ES_UNICAST_HOSTS}/g" $ES_CONF
 fi
 
+if [[ ! -z "$ES_NETWORK_HOST" ]]; then
+  sed -ie "s/#network.host: ES_NETWORK_HOST/network.host: ${ES_NETWORK_HOST}/g" $ES_CONF
+fi
+
 # if `docker run` first argument start with `--` the user is passing launcher arguments
 if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then
   /opt/elasticsearch/bin/elasticsearch \

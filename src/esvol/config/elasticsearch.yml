@@ -12,7 +12,7 @@ path.logs: /esvol/logs
 #path.plugins: /esvol/plugins
 # Path to temporary files:
 path.work: /esvol/work
-
+#network.host: ES_NETWORK_HOST
 # Cluster name identifies your cluster for auto-discovery. If you're running
 # multiple clusters on the same network, make sure you're using unique names.
 #cluster.name: es01
