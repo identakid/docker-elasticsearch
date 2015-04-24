@@ -63,6 +63,14 @@ if [[ ! -z "$ES_UNICAST_HOSTS" ]]; then
   sed -ie "s/#discovery.zen.ping.unicast.hosts: ES_UNICAST_HOSTS/discovery.zen.ping.unicast.hosts: ${ES_UNICAST_HOSTS}/g" $ES_CONF
 fi
 
+if [[ ! -z "$ES_NETWORK_PUBLISH_HOST" ]]; then
+  sed -ie "s/#network.publish_host: ES_NETWORK_PUBLISH_HOST/network.publish_host: ${ES_NETWORK_PUBLISH_HOST}/g" $ES_CONF
+fi
+
+if [[ ! -z "$ES_NETWORK_BIND_HOST" ]]; then
+  sed -ie "s/#network.bind_host: ES_NETWORK_BIND_HOST/network.bind_host: ${ES_NETWORK_BIND_HOST}/g" $ES_CONF
+fi
+
 if [[ ! -z "$ES_NETWORK_HOST" ]]; then
   sed -ie "s/#network.host: ES_NETWORK_HOST/network.host: ${ES_NETWORK_HOST}/g" $ES_CONF
 fi
