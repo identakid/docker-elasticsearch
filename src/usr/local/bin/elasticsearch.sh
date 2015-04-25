@@ -33,16 +33,11 @@ if [ ! "$(ls -A ${ES_CFG_URL})" ]; then
 fi
 
 # Setup for AWS discovery
-if [[ ! -z "$ES_DISCOVERY" && ! -z $AWS_ACCESS_KEY && ! -z $AWS_SECRET_KEY && ! -z $AWS_S3_BUCKET && ! -z $AWS_REGION ]]; then
+if [[ ! -z $AWS_ACCESS_KEY && ! -z $AWS_SECRET_KEY && ! -z $AWS_S3_BUCKET && ! -z $AWS_REGION ]]; then
   sed -ie "s/#cloud.aws.access_key: AWS_ACCESS_KEY/cloud.aws.access_key: ${AWS_ACCESS_KEY}/g" $ES_CONF
   sed -ie "s/#cloud.aws.secret_key: AWS_SECRET_KEY/cloud.aws.secret_key: ${AWS_SECRET_KEY}/g" $ES_CONF
   sed -ie "s/#cloud.node.auto_attributes: true/cloud.node.auto_attributes: true/g" $ES_CONF
-  sed -ie "s/#discovery.type: ec2/discovery.type: ec2/g" $ES_CONF
   sed -ie "s/#repositories.s3.bucket: AWS_S3_BUCKET/repositories.s3.bucket: ${AWS_S3_BUCKET}/g" $ES_CONF
-
-  if [[ ! -z $ES_PUBLISH_HOST ]]; then
-    sed -ie "s/#network.publish_host: ES_PUBLISH_HOST/network.publish_host: ${ES_PUBLISH_HOST}/g" $ES_CONF
-  fi
 fi
 
 sed -ie "s/#discovery.zen.ping.multicast.enabled: ES_MULTICAST_ENABLED/discovery.zen.ping.multicast.enabled: ${ES_MULTICAST_ENABLED}/g" $ES_CONF
@@ -74,6 +69,15 @@ fi
 if [[ ! -z "$ES_NETWORK_HOST" ]]; then
   sed -ie "s/#network.host: ES_NETWORK_HOST/network.host: ${ES_NETWORK_HOST}/g" $ES_CONF
 fi
+
+if [[ ! -z "$ES_NODE_DATA" ]]; then
+  sed -ie "s/#node.data: ES_NODE_DATA/node.data: ${ES_NODE_DATA}/g" $ES_CONF
+fi
+
+if [[ ! -z "$ES_NODE_MASTER" ]]; then
+  sed -ie "s/#node.master: ES_NODE_MASTER/node.master: ${ES_NODE_MASTER}/g" $ES_CONF
+fi
+
 
 # if `docker run` first argument start with `--` the user is passing launcher arguments
 if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then

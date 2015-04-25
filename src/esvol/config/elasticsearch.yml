@@ -18,7 +18,8 @@ path.work: /esvol/work
 # Cluster name identifies your cluster for auto-discovery. If you're running
 # multiple clusters on the same network, make sure you're using unique names.
 #cluster.name: es01
-
+#node.data: ES_NODE_DATA
+#node.master: ES_NODE_MASTER
 # Node names are generated dynamically on startup, so you're relieved
 # from configuring them manually. You can tie this node to a specific name:
 #node.name: ES_NODE_NAME
