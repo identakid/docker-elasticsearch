@@ -23,7 +23,7 @@ path.work: /esvol/work
 # Node names are generated dynamically on startup, so you're relieved
 # from configuring them manually. You can tie this node to a specific name:
 #node.name: ES_NODE_NAME
-
+#http.enabled: ES_HTTP_ENABLED
 # Allow recovery process after N nodes in a cluster are up:
 #gateway.recover_after_nodes: ES_RECOVER_AFTER_NODES
 # Set the timeout to initiate the recovery process, once the N nodes

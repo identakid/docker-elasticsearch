@@ -78,6 +78,10 @@ if [[ ! -z "$ES_NODE_MASTER" ]]; then
   sed -ie "s/#node.master: ES_NODE_MASTER/node.master: ${ES_NODE_MASTER}/g" $ES_CONF
 fi
 
+if [[ ! -z "$ES_HTTP_ENABLED" ]]; then
+  sed -ie "s/#http.enabled: ES_HTTP_ENABLED/http.enabled: ${ES_HTTP_ENABLED}/g" $ES_CONF
+fi
+
 
 # if `docker run` first argument start with `--` the user is passing launcher arguments
 if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then
