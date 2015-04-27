@@ -33,7 +33,8 @@ path.work: /esvol/work
 # are up (and recover_after_nodes is met), begin recovery process immediately
 # (without waiting for recover_after_time to expire):
 #gateway.expected_nodes: 2
-
+http.cors.enabled: true
+http.cors.allow-origin: "*"
 # Disable multicast discovery:
 #discovery.zen.ping.multicast.enabled: ES_MULTICAST_ENABLED
 # Configure an initial list of master nodes in the cluster
